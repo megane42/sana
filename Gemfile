@@ -1,4 +1,5 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "discordrb", "3.2.1"
-gem "dotenv", "2.2.1"
+gem 'discordrb'
+gem 'dotenv'
+gem 'challonge-api'
