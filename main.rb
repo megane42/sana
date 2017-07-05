@@ -21,9 +21,9 @@ bot.message(content: 'やりますか') do |event|
     tournament.quick_advance   = true # undocumented
     raise tournament.errors.full_messages.join("\n") unless tournament.save
 
-    online_member_names = event.server.members.select{|m| m.status == :online && !m.current_bot?}.map{|m| m.username}
-    online_member_names.each do |name|
-      Challonge::Participant.create(:name => name, :tournament => tournament)
+    online_members = event.server.members.select{|m| m.status == :online && !m.current_bot?}
+    online_members.each do |m|
+      Challonge::Participant.create(:name => m.name, :tournament => tournament)
     end
 
     tournament.start!
@@ -36,9 +36,9 @@ bot.message(content: 'やりますか') do |event|
     EOT
   else
     event.respond <<~EOT
+      ほいっ！
       #{tournament.full_challonge_url}
     EOT
-    event.respond
   end
 end
 
